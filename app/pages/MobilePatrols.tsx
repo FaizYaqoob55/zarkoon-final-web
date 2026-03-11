@@ -94,7 +94,7 @@ export function MobilePatrols() {
                             </div>
                             <h3 className="text-[#0A1929] text-2xl font-bold mb-4">Visual Deterrent</h3>
                             <p className="text-gray-600 font-light leading-relaxed">
-                                Highly visible, fully liveried Zarkoon response vehicles clearly warn potential intruders that the premises are actively protected.
+                                Highly visible, fully liveried Zarkoon Security Limited response vehicles clearly warn potential intruders that the premises are actively protected.
                             </p>
                         </div>
                         {/* Feature 3 */}

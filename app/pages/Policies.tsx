@@ -42,7 +42,7 @@ export function Policies() {
           </h1>
 
           <div className="inline-block bg-[#1E5A8E] text-white text-sm font-bold uppercase tracking-widest px-5 py-2 mb-8">
-            Zarkoon Security Services Limited
+            Zarkoon Security Limited
           </div>
 
           <p className="text-white/70 text-lg max-w-2xl font-light">
@@ -67,7 +67,7 @@ export function Policies() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="space-y-6">
               <p className="text-gray-600 text-lg leading-relaxed font-light">
-                Your privacy is important to us. This Privacy Policy explains how Zarkoon Security Services Limited collects, uses, and protects your personal information.
+                Your privacy is important to us. This Privacy Policy explains how Zarkoon Security Limited collects, uses, and protects your personal information.
               </p>
               <p className="text-gray-600 text-lg leading-relaxed font-light">
                 We collect information that you provide to us directly when you contact us for services or employment. This may include your name, contact details, and professional information.
@@ -78,7 +78,7 @@ export function Policies() {
                 We use this information to provide our security services, process job applications, and communicate with you about our offerings.
               </p>
               <p className="text-gray-600 text-lg leading-relaxed font-light">
-                Zarkoon Security Services takes significant measures to protect your data against unauthorized access, alteration, or destruction.
+                Zarkoon Security Limited takes significant measures to protect your data against unauthorized access, alteration, or destruction.
               </p>
             </div>
           </div>
@@ -131,7 +131,7 @@ export function Policies() {
           {/* Footer Note */}
           <div className="mt-20 pt-12 border-t border-gray-200 text-center">
             <p className="text-gray-400 text-sm font-light uppercase tracking-widest">
-              Zarkoon Security Services Limited &copy; 2025
+              Zarkoon Security Limited &copy; 2025
             </p>
           </div>
         </div>

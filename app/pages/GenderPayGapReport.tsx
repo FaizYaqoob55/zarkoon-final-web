@@ -53,7 +53,7 @@ export function GenderPayGapReport() {
               GENDER PAY GAP<br />REPORT 2024-2025
             </h1>
             <div className="inline-block bg-[#5DADE2] text-white text-sm font-bold uppercase tracking-widest px-4 py-2 mb-8">
-              ZARKOON SECURITY SERVICES LIMITED
+              ZARKOON SECURITY LIMITED
             </div>
             <div className="text-white/90 text-sm font-light space-y-1 italic mt-4">
               <p>Company Number: 09761794</p>
@@ -91,7 +91,7 @@ export function GenderPayGapReport() {
               OVERVIEW
             </h2>
             <p className="text-white/90 text-base md:text-lg font-light leading-[1.8] max-w-[65%]" style={{ textAlign: "justify" }}>
-              Zarkoon Security Services Limited is a private limited company incorporated on 4 September 2015,
+              Zarkoon Security Limited is a private limited company incorporated on 4 September 2015,
               operating in the private security sector. The company provides a range of security services across the
               United Kingdom. As part of our commitment to equality and transparency, we present our Gender Pay Gap Report
               for the specified reporting period.
@@ -143,7 +143,7 @@ export function GenderPayGapReport() {
             </div>
             <div className="bg-[#1E5A8E]/20 border-l-4 border-[#5DADE2] rounded-r-lg px-8 py-5 mt-4">
               <p className="text-white/80 text-sm font-light leading-relaxed text-center">
-                All employees at Zarkoon Security Services Limited are compensated at the national minimum wage rate.
+                All employees at Zarkoon Security Limited are compensated at the national minimum wage rate.
                 Consequently, there is no difference in average or median hourly pay between male and female employees.
               </p>
             </div>
@@ -243,8 +243,8 @@ export function GenderPayGapReport() {
             </div>
             <div className="bg-[#1E5A8E]/15 border-l-4 border-[#5DADE2] rounded-r-lg px-6 py-5 mt-2">
               <p className="text-white/80 text-sm font-light leading-relaxed" style={{ textAlign: "justify" }}>
-                Zarkoon Security Services Limited does not operate a bonus pay system; therefore, there is no bonus
-                pay gap to report. Zarkoon Security Services Limited is committed to ensuring equal pay for equal work,
+                Zarkoon Security Limited does not operate a bonus pay system; therefore, there is no bonus
+                pay gap to report. Zarkoon Security Limited is committed to ensuring equal pay for equal work,
                 regardless of gender. The absence of a gender pay gap in our organization underscores our
                 dedication to fair and equitable compensation practices.
               </p>
@@ -278,7 +278,7 @@ export function GenderPayGapReport() {
           {/* Footer line */}
           <div className="absolute bottom-[4%] left-[8%] right-[8%] border-t border-white/10 pt-4 text-center">
             <p className="text-white/40 text-xs font-light">
-              © 2025 Zarkoon Security Services Limited. All Rights Reserved.
+              © 2025 Zarkoon Security Limited. All Rights Reserved.
             </p>
           </div>
         </div>

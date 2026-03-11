@@ -10,8 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../components/ui/select";
-
-const heroImage = "https://images.unsplash.com/photo-1582139329536-e7284fece509?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMG9mZmljZXIlMjBndWFyZHxlbnwxfHx8fDE3NzE5MTU5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080";
+import heroImage from "../../assets/manned-guarding-services.jpeg";
 
 export function MannedGuarding() {
     const [formData, setFormData] = useState({
@@ -49,16 +48,16 @@ export function MannedGuarding() {
         <div className="min-h-screen font-['Outfit'] bg-gray-50">
             {/* Unique Hero Banner */}
             <section
-                className="relative h-[450px] flex items-center justify-start bg-cover bg-center overflow-hidden"
+                className="relative h-[600px] flex items-center justify-start bg-cover bg-center overflow-hidden"
                 style={{ backgroundImage: `url(${heroImage})` }}
             >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1929]/95 via-[#0A1929]/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1929]/80 via-[#0A1929]/40 to-transparent"></div>
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
                     <div className="max-w-2xl">
                         <p className="text-[#5DADE2] text-sm font-bold uppercase tracking-[0.3em] mb-4">Professional Protection</p>
-                        <h1 className="text-white text-6xl font-bold mb-6 tracking-tight leading-tight">
+                        <h1 className="text-white text-6xl md:text-8xl font-bold mb-6 tracking-tight leading-tight">
                             Manned Guarding <br />
-                            <span className="text-[#5DADE2]">Services</span>
+                            <span className="text-[#5DADE2]">Solutions</span>
                         </h1>
                         <div className="w-20 h-1.5 bg-[#5DADE2] rounded-full"></div>
                     </div>
@@ -76,7 +75,7 @@ export function MannedGuarding() {
                             Elite Security Personnel
                         </h2>
                         <p className="text-[#2C3E50] text-lg font-light leading-relaxed mb-8">
-                            Zarkoon Security provides premier manned guarding services tailored for high-stakes environments. Our officers are SIA-licensed professionals trained to handle complex security challenges with precision and absolute discretion.
+                            Zarkoon Security Limited provides premier manned guarding services tailored for high-stakes environments. Our officers are SIA-licensed professionals trained to handle complex security challenges with precision and absolute discretion.
                         </p>
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {[
@@ -96,7 +95,7 @@ export function MannedGuarding() {
                     </div>
 
                     <div className="space-y-6">
-                        <h3 className="text-[#0A1929] text-2xl font-bold">Why Choose Zarkoon Manned Guarding?</h3>
+                        <h3 className="text-[#0A1929] text-2xl font-bold">Why Choose Zarkoon Security Limited?</h3>
                         <p className="text-[#2C3E50] font-light leading-relaxed">
                             Our approach goes beyond simple observation. We integrate human intelligence with modern security technology to provide an impenetrable shield for your business. Whether it's construction sites in Hayes or corporate offices in London, our presence is a deterrent to crime and a guarantee of safety.
                         </p>

@@ -133,7 +133,7 @@ export function GenderPayGap() {
         <img src={logoImage} alt="Zarkoon Security Services" style={{ height: 56, width: "auto" }} />
         <div>
           <div className="text-[10pt] font-bold uppercase tracking-widest text-[#1E5A8E]">
-            Zarkoon Security Services Limited
+            Zarkoon Security Limited
           </div>
           <div className="text-[9pt] text-gray-500 font-light">
             Gender Pay Gap Report 2024–2025 &nbsp;|&nbsp; Reporting Period: 1 April 2024 – 31 March 2025
@@ -161,7 +161,7 @@ export function GenderPayGap() {
           </h1>
 
           <div className="inline-block bg-[#1E5A8E] text-white text-sm font-bold uppercase tracking-widest px-5 py-2 mb-8">
-            Zarkoon Security Services Limited
+            Zarkoon Security Limited
           </div>
 
           <div className="text-white/60 text-sm font-light space-y-1 mb-10">
@@ -199,7 +199,7 @@ export function GenderPayGap() {
           <hr className="print-rule hidden" />
           <div className="w-20 h-1 bg-[#5DADE2] mb-8 no-print" />
           <p className="text-white/85 text-lg md:text-xl font-light leading-relaxed">
-            Zarkoon Security Services is a private limited company operating in the private security sector.
+            Zarkoon Security Limited is a private limited company operating in the private security sector.
             As part of our commitment to equality and transparency, we present our Gender Pay Gap Report.
             The company provides a range of professional security services across the United Kingdom and is
             dedicated to maintaining fair and equitable compensation practices for all employees regardless

@@ -1,30 +1,35 @@
 import { Link } from "react-router-dom";
+import mannedGuardingImg from "../../assets/manned-guarding-services.jpeg";
+import eventSecurityImg from "../../assets/event-security-500x500.png";
+import mobilePatrolImg from "../../assets/mobile patrol.jpg";
+import keyHoldingImg from "../../assets/key holding 1 (2) (1).png";
+import receptionSecurityImg from "../../assets/reception_security.png";
 
 const services = [
   {
     title: "Manned Guarding",
     path: "/manned-guarding",
-    image: "https://images.unsplash.com/photo-1761064392859-2bfa734e9f3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMGd1YXJkJTIwdW5pZm9ybSUyMHByb2Zlc3Npb25hbHxlbnwxfHx8fDE3NzE4Njk1ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: mannedGuardingImg,
   },
   {
     title: "Event Security",
     path: "/event-security",
-    image: "https://images.unsplash.com/photo-1767593269826-5444c41ce503?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuaWdodCUyMGV2ZW50JTIwc2VjdXJpdHklMjBsaWdodHN8ZW58MXx8fHwxNzcxOTE1OTMyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: eventSecurityImg,
   },
   {
     title: "Mobile Patrols",
     path: "/mobile-patrols",
-    image: "https://images.unsplash.com/photo-1629320790276-08cf3ac01d7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMHBhdHJvbCUyMGNhciUyMHZlaGljbGV8ZW58MXx8fHwxNzcxOTE1OTMyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: mobilePatrolImg,
   },
   {
     title: "Security Reception",
     path: "/security-reception",
-    image: "https://images.unsplash.com/photo-1724343025504-3afb6d67566b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMG1vbml0b3JpbmclMjBjb250cm9sJTIwcm9vbXxlbnwxfHx8fDE3NzE4Mzk0Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: receptionSecurityImg,
   },
   {
     title: "Key Holding & Alarm Response",
     path: "/key-holding",
-    image: "https://images.unsplash.com/photo-1758448721149-aa0ce8e1b2c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjBidWlsZGluZyUyMHJlY2VwdGlvbnxlbnwxfHx8fDE3NzE5MTU5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: keyHoldingImg,
   },
 ];
 

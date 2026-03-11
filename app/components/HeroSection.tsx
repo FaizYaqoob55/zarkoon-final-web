@@ -29,12 +29,12 @@ export function HeroSection() {
             Safeguarding You,<br />
             Securing Tomorrow:<br />
             <span className="text-[#5DADE2]">Zarkoon Security</span><br />
-            Service
+            Limited
           </h1>
 
           {/* Premium Description */}
           <p className="text-gray-200 text-lg font-light leading-relaxed mb-10 max-w-xl">
-            Providing professional security services with a commitment to public safety and social impact. From manned guarding to mobile patrols, we prioritize your safety.
+            Providing professional security limited with a commitment to public safety and social impact. From manned guarding to mobile patrols, we prioritize your safety.
           </p>
 
           {/* Premium CTA Button */}

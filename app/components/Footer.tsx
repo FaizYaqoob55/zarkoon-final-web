@@ -20,13 +20,13 @@ export function Footer() {
               <Link to="/" className="inline-block transition-transform hover:scale-105 duration-300">
                 <img
                   src={logoImage}
-                  alt="Zarkoon Security Services"
+                  alt="Zarkoon Security Limited"
                   className="h-16 w-auto brightness-0 invert"
                 />
               </Link>
             </div>
             <p className="text-gray-400 text-sm font-light mb-8 leading-relaxed">
-              When it comes to protecting your business and ensuring peace of mind, look no further than Zarkoon Security Services.
+              When it comes to protecting your business and ensuring peace of mind, look no further than Zarkoon Security Limited.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="text-center">
             <p className="text-sm font-light text-gray-500">
-              Copyrights @ 2025. ZARKOON SECURITY SERVICES LIMITED
+              Copyrights @ 2025. ZARKOON SECURITY LIMITED
             </p>
           </div>
         </div>

@@ -4,7 +4,14 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 
-const navLinks = [
+interface NavItem {
+  name: string;
+  path?: string;
+  target?: string;
+  dropdown?: { name: string; path: string; target?: string }[];
+}
+
+const navLinks: NavItem[] = [
   { name: "Home", path: "/" },
   {
     name: "Services",
@@ -72,7 +79,7 @@ export function Header() {
           <Link to="/">
             <img
               src={logoImage}
-              alt="Zarkoon Security Services"
+              alt="Zarkoon Security Limited"
               className="h-20 md:h-24 w-auto"
             />
           </Link>

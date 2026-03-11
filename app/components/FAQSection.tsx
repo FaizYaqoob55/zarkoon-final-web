@@ -1,19 +1,19 @@
 export function FAQSection() {
   const faqs = [
     {
-      question: "What services does Zarkoon Security services Ltd offer?",
-      answer: "Zarkoon Security Services Ltd provides high-quality security services for residential, commercial, and industrial properties. Their services encompass safeguarding individuals, Their services encompass safeguarding individuals, and businesses, with a team of experienced professionals."
+      question: "What services does Zarkoon Security Limited offer?",
+      answer: "Zarkoon Security Limited provides high-quality security limited for residential, commercial, and industrial properties. Their services encompass safeguarding individuals, Their services encompass safeguarding individuals, and businesses, with a team of experienced professionals."
     },
     {
-      question: "What sets Zarkoon Security services Ltd apart from other security companies?",
-      answer: "Zarkoon Security services Ltd stands out due to its dedication to providing customized security solutions to address the unique needs of professionalism, effectiveness, and friendliness in every step, with high-quality service at the forefront of every client interaction."
+      question: "What sets Zarkoon Security Limited apart from other security companies?",
+      answer: "Zarkoon Security Limited stands out due to its dedication to providing customized security solutions to address the unique needs of professionalism, effectiveness, and friendliness in every step, with high-quality service at the forefront of every client interaction."
     },
     {
-      question: "What is the core mission of Zarkoon Security services Ltd?",
-      answer: "Zarkoon Security services Ltd is dedicated to being more than just a security firm. They strive to be your trusted partner in safeguarding what you value most, with a vision to provide unwavering peace of mind. Their mission is to make every client's security needs a priority by providing reliable, responsive service at all times."
+      question: "What is the core mission of Zarkoon Security Limited?",
+      answer: "Zarkoon Security Limited is dedicated to being more than just a security firm. They strive to be your trusted partner in safeguarding what you value most, with a vision to provide unwavering peace of mind. Their mission is to make every client's security needs a priority by providing reliable, responsive service at all times."
     },
     {
-      question: "What can clients expect when choosing Zarkoon Security services Ltd?",
+      question: "What can clients expect when choosing Zarkoon Security Limited?",
       answer: "Clients can expect reliability, professionalism, and an unwavering commitment to service excellence. Our team of trained and qualified operatives is the cornerstone of our services. This company is dedicated to saving lives and fortifying the safety of every client."
     }
   ];

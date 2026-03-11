@@ -30,10 +30,10 @@ export function AboutSection() {
               Commitment to Excellence: <span className="text-[#5DADE2]">Providing Tailored High-Quality</span> Security Services
             </h2>
             <p className="text-gray-300 text-lg font-light leading-relaxed mb-8">
-              At Zarkoon Security, we understand that every client has unique security needs. That's why we offer tailored, high-quality security services specifically designed to meet your requirements. As a professional security company, we take pride in our comprehensive approach that provides security and professionalism to safeguard what matters most to you.
+              At Zarkoon Security Limited, we understand that every client has unique security needs. That's why we offer tailored, high-quality security services specifically designed to meet your requirements. As a professional security company, we take pride in our comprehensive approach that provides security and professionalism to safeguard what matters most to you.
             </p>
             <p className="text-gray-400 text-base font-light leading-relaxed mb-10">
-              Zarkoon Security Ltd has earned a reputation for delivering reliable and effective security solutions, ensuring the security of individuals, and businesses.
+              Zarkoon Security Limited has earned a reputation for delivering reliable and effective security solutions, ensuring the security of individuals, and businesses.
             </p>
             <Link to="/about" className="inline-block bg-[#1E5A8E] text-white px-10 py-4 text-base font-bold tracking-wide hover:bg-[#5DADE2] transition-all duration-300 shadow-2xl hover:shadow-3xl">
               Read More
@@ -43,7 +43,7 @@ export function AboutSection() {
           {/* Right Column - Premium Image */}
           <div className="relative">
             <div className="relative bg-gradient-to-br from-gray-700 to-gray-900 h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-[#1E5A8E]/30">
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1767637421198-82c5612ec5af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMHZlc3QlMjBvZmZpY2VyJTIwYmFja3xlbnwxfHx8fDE3NzE5MTU5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080"
                 alt="Security Officer"
                 className="w-full h-full object-cover"

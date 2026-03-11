@@ -88,7 +88,7 @@ export function KeyHolding() {
                             <h2 className="text-[#0A1929] text-5xl font-bold leading-tight">Professional <br /><span className="text-[#1E5A8E]">Key Holding Service</span></h2>
                         </div>
                         <p className="text-gray-600 text-lg font-light leading-relaxed">
-                            Our nationwide coverage ensures that no matter where your premises are located, Zarkoon Security can provide a professional responder within minutes of an alarm trigger. We hold your keys in a secure, high-stakes environment according to BS7984 standards.
+                            Our nationwide coverage ensures that no matter where your premises are located, Zarkoon Security Limited can provide a professional responder within minutes of an alarm trigger. We hold your keys in a secure, high-stakes environment according to BS7984 standards.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                             <div className="flex gap-4 p-6 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
@@ -167,7 +167,7 @@ export function KeyHolding() {
                             <ShieldAlert className="w-16 h-16 text-[#1E5A8E] mb-8" />
                             <h3 className="text-[#0A1929] text-4xl font-bold mb-6 tracking-tight">Protecting Your Vision</h3>
                             <p className="text-gray-600 text-xl font-light leading-relaxed mb-10">
-                                Whether it's a false alarm or a true emergency, Zarkoon Security provides peace of mind. We act as your first line of defense, ensuring your property is secure without risking your staff's safety.
+                                Whether it's a false alarm or a true emergency, Zarkoon Security Limited provides peace of mind. We act as your first line of defense, ensuring your property is secure without risking your staff's safety.
                             </p>
                             <div className="space-y-6">
                                 <div className="flex items-center gap-4">

@@ -225,7 +225,7 @@ export function SecurityReception() {
                         </div>
                         <div className="relative z-10 max-w-lg text-left">
                             <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight">
-                                Zarkoon Security Services <br />
+                                Zarkoon Security Limited <br />
                                 <span className="text-[#5DADE2]">Your Trusted Security Company</span>
                             </h2>
                         </div>

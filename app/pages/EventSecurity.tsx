@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, Shield, Calendar, Music, Building2, CheckCircle, Info } from "lucide-react";
+import heroImage from "../../assets/event-security-500x500.png";
+import detailsImage from "../../assets/event-security-details.png";
+import festivalImg from "../../assets/festival-security-card.png";
+import corporateImg from "../../assets/corporate-event-card.png";
+import musicImg from "../../assets/music-event-card.png";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Button } from "../components/ui/button";
@@ -12,7 +17,6 @@ import {
     SelectValue,
 } from "../components/ui/select";
 
-const heroImage = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxldmVudCUyMHNlY3VyaXR5JTIwY29uY2VydHxlbnwxfHx8fDE3NzI3ODQzMjV8MA&ixlib=rb-4.1.0&q=80&w=1080";
 
 export function EventSecurity() {
     const [formData, setFormData] = useState({
@@ -44,16 +48,19 @@ export function EventSecurity() {
             title: "Festival Security",
             description: "Crowd management and site protection for large-scale outdoor festivals and cultural events.",
             icon: Music,
+            image: festivalImg
         },
         {
             title: "Corporate Event Security",
             description: "Discreet and professional security for high-profile business gatherings and conferences.",
             icon: Building2,
+            image: corporateImg
         },
         {
             title: "Music Festival Security",
             description: "Specialized safety protocols for concerts and tours, ensuring performer and fan safety.",
             icon: Calendar,
+            image: musicImg
         }
     ];
 
@@ -85,17 +92,42 @@ export function EventSecurity() {
             <section className="py-32 max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-24">
                     {services.map((service, idx) => (
-                        <div key={idx} className="group p-12 bg-[#F4F8FB] rounded-[50px] border-2 border-transparent hover:border-[#5DADE2]/30 transition-all duration-500 hover:shadow-2xl">
-                            <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-10 shadow-sm group-hover:bg-[#1E5A8E] transition-colors duration-500">
-                                <service.icon className="w-10 h-10 text-[#1E5A8E] group-hover:text-white transition-colors duration-500" />
+                        <div 
+                            key={idx} 
+                            className="group relative h-[500px] rounded-[40px] overflow-hidden cursor-pointer shadow-2xl transition-all duration-500"
+                        >
+                            {/* Background Image */}
+                            <div 
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                                style={{ backgroundImage: `url(${service.image})` }}
+                            />
+                            
+                            {/* Premium Overlay */}
+                            <div className="absolute inset-0 bg-[#0A1929]/40 group-hover:bg-[#0A1929]/80 transition-all duration-500" />
+
+                            {/* Content Wrapper */}
+                            <div className="absolute inset-0 p-12 flex flex-col justify-end">
+                                {/* Normal State: Only Title */}
+                                <h3 className="text-white text-3xl font-bold mb-0 transform translate-y-0 group-hover:-translate-y-4 transition-transform duration-500">
+                                    {service.title}
+                                </h3>
+
+                                {/* Hover State Elements (Fade In) */}
+                                <div className="space-y-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                                    <div className="w-16 h-16 bg-[#1E5A8E] rounded-2xl flex items-center justify-center">
+                                        <service.icon className="w-8 h-8 text-white" />
+                                    </div>
+                                    <p className="text-gray-300 text-lg font-light leading-relaxed">
+                                        {service.description}
+                                    </p>
+                                    <Link 
+                                        to="/contact-us" 
+                                        className="inline-flex items-center gap-3 text-[#5DADE2] text-lg font-bold hover:gap-5 transition-all duration-300"
+                                    >
+                                        Get Started <CheckCircle className="w-5 h-5" />
+                                    </Link>
+                                </div>
                             </div>
-                            <h3 className="text-[#0A1929] text-3xl font-bold mb-6">{service.title}</h3>
-                            <p className="text-gray-600 text-lg font-light leading-relaxed mb-8">
-                                {service.description}
-                            </p>
-                            <Link to="/contact-us" className="text-[#1E5A8E] text-lg font-bold flex items-center gap-3 group-hover:gap-5 transition-all duration-300">
-                                Get Started <CheckCircle className="w-5 h-5" />
-                            </Link>
                         </div>
                     ))}
                 </div>
@@ -105,8 +137,8 @@ export function EventSecurity() {
                     <div className="lg:col-span-6">
                         <div className="relative rounded-[60px] overflow-hidden shadow-2xl border-4 border-[#1E5A8E]/10">
                             <img
-                                src="https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxldmVudCUyMHNlY3VyaXR5JTIwY3Jvd2R9ZW58MXx8fHwxNzc1NjM5MzMzfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                                alt="Event Security Crowd"
+                                src={detailsImage}
+                                alt="Event Security Details"
                                 className="w-full h-[600px] object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0A1929] to-transparent opacity-60"></div>
@@ -120,7 +152,7 @@ export function EventSecurity() {
                             <h2 className="text-4xl font-bold leading-tight">How much does security <br /><span className="text-[#5DADE2]">cost for a festival?</span></h2>
                         </div>
                         <p className="text-gray-300 text-lg font-light leading-relaxed mb-10">
-                            Event security pricing is dynamic and depends heavily on the risk profile of your gathering. Factors include crowd size, high-profile attendance, alcoholic beverage availability, and the duration of the event. At Zarkoon, we provide transparent, competitive rates based on SIA-licensed personnel requirements.
+                            Event security pricing is dynamic and depends heavily on the risk profile of your gathering. Factors include crowd size, high-profile attendance, alcoholic beverage availability, and the duration of the event. At Zarkoon Security Limited, we provide transparent, competitive rates based on SIA-licensed personnel requirements.
                         </p>
                         <div className="space-y-6">
                             {[

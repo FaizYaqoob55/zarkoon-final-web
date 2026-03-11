@@ -9,6 +9,7 @@ import {
   Star,
   HeartPulse,
 } from "lucide-react";
+import { CertificationsSection } from "../components/CertificationsSection";
 
 const heroImage =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1920";
@@ -236,6 +237,9 @@ export function Accreditations() {
           </div>
         </div>
       </section>
+
+      {/* ── Our Professional Certifications (Shared) ── */}
+      <CertificationsSection />
     </div>
   );
 }

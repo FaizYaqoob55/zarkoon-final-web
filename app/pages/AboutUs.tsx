@@ -27,12 +27,12 @@ export function AboutUs() {
               <div className="mb-8">
                 <p className="text-[#5DADE2] font-semibold text-sm tracking-widest uppercase mb-3">ABOUT US</p>
                 <h2 className="text-4xl font-bold text-[#0A1929] mb-6 leading-tight">
-                  Your Safety, Our Priority: Zarkoon Security Service
+                  Your Safety, Our Priority: Zarkoon Security Limited
                 </h2>
               </div>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Zarkoon Security Services Limited has a straightforward objective. We aspire to become the leading company within the security sector, embodying innovation and professionalism. Through our commitment to enhance this, we will provide our clients with top-rated, innovative standards of service in both their security-related necessities.
+                  Zarkoon Security Limited has a straightforward objective. We aspire to become the leading company within the security sector, embodying innovation and professionalism. Through our commitment to enhance this, we will provide our clients with top-rated, innovative standards of service in both their security-related necessities.
                 </p>
                 <p>
                   We have invested substantial energy and resources in recruiting industry leaders, decision-makers, and employees who have committed to supporting the prosperity of our respective clients. We are proud, and we will never settle. We will change in response to industry needs, and we will work tirelessly to retain and add value alongside our Clientele.
@@ -107,7 +107,7 @@ export function AboutUs() {
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed mb-8">
                 <p>
-                  Zarkoon Security Services Ltd is committed to preventing modern slavery and human trafficking in all areas of our business and taking immediate action when we are aware that something in our Business is not being done as we being, please read our full policy.
+                  Zarkoon Security Limited is committed to preventing modern slavery and human trafficking in all areas of our business and taking immediate action when we are aware that something in our Business is not being done as we being, please read our full policy.
                 </p>
                 <p>
                   We are dedicated to ensuring that there is no modern slavery or human trafficking in our business or our supply chains. This statement reflects our commitment to acting ethically and with integrity in all our business relationships.
