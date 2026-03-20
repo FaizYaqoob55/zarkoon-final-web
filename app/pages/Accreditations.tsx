@@ -86,23 +86,40 @@ export function Accreditations() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {accreditations.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 p-10 flex flex-col items-center group border border-gray-100"
-              >
-                <div className="h-32 w-full flex items-center justify-center mb-6">
-                  <img 
-                    src={item.imgSrc} 
-                    alt={item.name}
-                    className="max-w-full max-h-full object-contain"
-                  />
+            {accreditations.map((item, idx) => {
+              const isICO = item.imgSrc === icoLogo;
+              const content = (
+                <div
+                  className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 p-10 flex flex-col items-center group border border-gray-100 h-full w-full"
+                >
+                  <div className="h-32 w-full flex items-center justify-center mb-6">
+                    <img 
+                      src={item.imgSrc} 
+                      alt={item.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <h3 className="text-[#0A1929] text-xl font-bold tracking-tight text-center">
+                    {item.name}
+                  </h3>
                 </div>
-                <h3 className="text-[#0A1929] text-xl font-bold tracking-tight text-center">
-                  {item.name}
-                </h3>
-              </div>
-            ))}
+              );
+
+              return isICO ? (
+                <a 
+                  key={idx} 
+                  href="https://find-and-update.company-information.service.gov.uk/company/09761794" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={idx}>
+                  {content}
+                </div>
+              );
+            })}
           </div>
 
           {/* CTA */}

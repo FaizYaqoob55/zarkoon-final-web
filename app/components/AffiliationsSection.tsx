@@ -24,18 +24,36 @@ export function AffiliationsSection() {
         <div className="w-20 h-1 bg-[#5DADE2] mx-auto mb-12 rounded-full"></div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
-          {accreditations.map((item, idx) => (
-            <div
-              key={idx}
-              className="group flex items-center justify-center w-full h-32 p-4 rounded-2xl bg-white border border-gray-200 hover:border-[#5DADE2]/30 transition-all duration-300 hover:shadow-xl"
-            >
-              <img 
-                src={item.imgSrc} 
-                alt={item.altText}
-                className="w-full h-full object-contain"
-              />
-            </div>
-          ))}
+          {accreditations.map((item, idx) => {
+            const isICO = item.imgSrc === icoLogo;
+            const content = (
+              <div
+                className="group flex items-center justify-center w-full h-32 p-4 rounded-2xl bg-white border border-gray-200 hover:border-[#5DADE2]/30 transition-all duration-300 hover:shadow-xl cursor-pointer"
+              >
+                <img 
+                  src={item.imgSrc} 
+                  alt={item.altText}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            );
+
+            return isICO ? (
+              <a 
+                key={idx} 
+                href="https://find-and-update.company-information.service.gov.uk/company/09761794" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={idx} className="w-full">
+                {content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

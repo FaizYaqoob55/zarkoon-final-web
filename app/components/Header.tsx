@@ -4,6 +4,8 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 
+import { Phone, Mail, BadgeInfo } from "lucide-react";
+
 interface NavItem {
   name: string;
   path?: string;
@@ -67,26 +69,67 @@ export function Header() {
 
   return (
     <header className="bg-white shadow-sm font-['Outfit'] relative z-50">
-      {/* Top Row - Official Zarkoon Logo Centered */}
-      <div className="py-8 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 flex justify-center items-center relative">
-          <Link to="/">
-            <img
-              src={logoImage}
-              alt="Zarkoon Security Limited"
-              className="h-20 md:h-24 w-auto"
-            />
-          </Link>
-          {/* Mobile Menu Toggle */}
+      {/* Major Overhaul: Magnified White Header - Logo & Contacts Only */}
+      <div className="bg-white text-[#0A1929] py-6 md:py-8 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 md:gap-12 relative">
+          {/* Left Side: Magnified Logo */}
+          <div className="flex items-center">
+            <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 duration-300">
+              <img
+                src={logoImage}
+                alt="Zarkoon Security Limited"
+                className="h-16 md:h-20 lg:h-24 w-auto drop-shadow-sm"
+              />
+            </Link>
+          </div>
+
+          {/* Right Side: Magnified Contact Info Columns */}
+          <div className="flex flex-col sm:flex-row items-center gap-10 md:gap-16 lg:gap-24">
+            {/* Phone Column - Magnified */}
+            <div className="flex items-center gap-4 group">
+              <div className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center transition-all duration-300 group-hover:border-[#1E5A8E] group-hover:bg-gray-50 shadow-sm">
+                <Phone className="w-5 h-5 text-[#1E5A8E]" />
+              </div>
+              <div>
+                <p className="text-[11px] md:text-xs font-black text-[#1E5A8E] uppercase tracking-[0.15em] leading-none mb-2">
+                  Open 24 Hours
+                </p>
+                <a href="tel:+447488372418" className="text-xl md:text-2xl font-black text-[#0A1929] hover:text-[#1E5A8E] transition-all duration-300 leading-none tracking-tight">
+                  07488 372418
+                </a>
+              </div>
+            </div>
+
+            {/* Email Column - Magnified */}
+            <div className="flex items-center gap-4 group">
+              <div className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center transition-all duration-300 group-hover:border-[#1E5A8E] group-hover:bg-gray-50 shadow-sm">
+                <Mail className="w-5 h-5 text-[#1E5A8E]" />
+              </div>
+              <div>
+                <p className="text-[11px] md:text-xs font-black text-[#1E5A8E] uppercase tracking-[0.15em] leading-none mb-2">
+                  7 Days a Week
+                </p>
+                <a href="mailto:info@zarkoonsecurity.co.uk" className="text-lg md:text-xl font-bold text-[#0A1929] hover:text-[#1E5A8E] transition-all duration-300 leading-none lowercase tracking-tight">
+                  info@zarkoonsecurity.co.uk
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Menu Toggle - Centered vertically on the larger bar */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="absolute right-6 lg:hidden text-[#0A1929] p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="md:hidden absolute right-6 top-1/2 -translate-y-1/2 text-[#0A1929] p-2.5 hover:bg-gray-100 rounded-full transition-colors border border-gray-100 shadow-sm"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
       </div>
+
+
+
+
 
       {/* Second Row - Navigation Menu */}
       <nav className="bg-gradient-to-r from-gray-100 to-gray-50 border-b border-gray-300">

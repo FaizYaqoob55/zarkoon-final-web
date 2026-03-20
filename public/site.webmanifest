@@ -1,0 +1,19 @@
+{
+  "name": "Zarkoon Security Limited",
+  "short_name": "Zarkoon",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32 48x48 192x192 512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "theme_color": "#0A1929",
+  "background_color": "#0A1929",
+  "display": "standalone"
+}

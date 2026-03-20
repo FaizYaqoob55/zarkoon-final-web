@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
-import { 
-  ChevronRight, 
-  ExternalLink, 
-  GraduationCap, 
-  ShieldCheck, 
-  Building2, 
-  Lock, 
+import {
+  ChevronRight,
+  ExternalLink,
+  GraduationCap,
+  ShieldCheck,
+  Building2,
+  Lock,
   Info,
   Globe
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { Button } from "../components/ui/button";
 
-import heroImage from "figma:asset/page Manned-Guarding-Services.jpg";
-import guardImage from "figma:asset/security-concierge.jpg";
+import heroImage from "figma:asset/training-hero.jpg";
+import guardImage from "figma:asset/security-professional.jpg";
 
 const portals = [
   {
@@ -103,11 +103,11 @@ export function TrainingPortal() {
               <span className="text-[#1E5A8E]">Build Your Career.</span>
             </h2>
             <p className="text-gray-500 text-lg font-light leading-relaxed mb-10">
-              At Zarkoon Security Services, we take pride in supporting our team's personal and 
-              professional growth. Our Training Portal and curated resources are here to help 
-              every staff member stay sharp, qualified, and career-focused. Whether you're 
-              just starting out or progressing toward a leadership role, we're here to support 
-              your development with reliable tools, accredited training, and direct access to 
+              At Zarkoon Security Services, we take pride in supporting our team's personal and
+              professional growth. Our Training Portal and curated resources are here to help
+              every staff member stay sharp, qualified, and career-focused. Whether you're
+              just starting out or progressing toward a leadership role, we're here to support
+              your development with reliable tools, accredited training, and direct access to
               learning platforms.
             </p>
           </div>
@@ -119,10 +119,10 @@ export function TrainingPortal() {
               </div>
               {/* Inset Image (Composite Effect) */}
               <div className="absolute -bottom-12 -right-12 w-2/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white hidden md:block">
-                <img 
-                  src="https://images.unsplash.com/photo-1558442086-8ea19a79cd4d?auto=format&fit=crop&q=80&w=500" 
-                  alt="Security Guard Duty" 
-                  className="w-full h-auto object-cover" 
+                <img
+                  src="https://images.unsplash.com/photo-1558442086-8ea19a79cd4d?auto=format&fit=crop&q=80&w=500"
+                  alt="Security Guard Duty"
+                  className="w-full h-auto object-cover"
                 />
               </div>
             </div>
@@ -145,12 +145,12 @@ export function TrainingPortal() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {portals.map((portal, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="relative bg-[#2D3748] p-12 rounded-xl shadow-xl flex flex-col items-center text-center group transition-all duration-500 border-b-4 border-transparent hover:border-[#1E5A8E] overflow-hidden"
               >
                 {/* Hover Image Background */}
-                <div 
+                <div
                   className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-cover bg-center scale-110 group-hover:scale-100 transition-transform duration-700"
                   style={{ backgroundImage: `url('${portal.hoverImage}')` }}
                 />
@@ -160,9 +160,9 @@ export function TrainingPortal() {
                   {portal.icon}
                 </div>
                 <h3 className="relative z-20 text-white text-3xl font-extrabold mb-8 tracking-tight">{portal.title}</h3>
-                <a 
-                  href={portal.link} 
-                  target="_blank" 
+                <a
+                  href={portal.link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="relative z-20 w-48"
                 >
@@ -190,12 +190,12 @@ export function TrainingPortal() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {resources.map((resource, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="relative bg-[#2D3748] p-8 rounded-2xl shadow-lg flex flex-col group border border-white/5 hover:border-[#D4AF37]/30 transition-all overflow-hidden"
               >
                 {/* Hover Image Background */}
-                <div 
+                <div
                   className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-cover bg-center scale-110 group-hover:scale-100 transition-transform duration-700"
                   style={{ backgroundImage: `url('${resource.hoverImage}')` }}
                 />
@@ -210,9 +210,9 @@ export function TrainingPortal() {
                 <p className="relative z-20 text-white/50 text-sm font-light leading-relaxed mb-8 flex-grow group-hover:text-white/80 transition-colors">
                   {resource.description}
                 </p>
-                <a 
-                  href={resource.link} 
-                  target="_blank" 
+                <a
+                  href={resource.link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="relative z-20"
                 >

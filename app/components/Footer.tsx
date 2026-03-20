@@ -1,12 +1,13 @@
-import logoImage from "figma:asset/c13cca16d7f41b2233e632ec5f799ebb98dc1e40.png";
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import silverLogo from "./silver-footer-logo.png";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Footer() {
   const socialLinks = [
     { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/company/zarkoon-security-limited" },
-    { name: "Instagram", icon: Instagram, url: "https://instagram.com/zarkoonsecurity" },
-    { name: "Facebook", icon: Facebook, url: "https://facebook.com/zarkoonsecurity" },
+    { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/zarkoonsecurity?igsh=bTV6d2U3NnlicXMw&utm_source=qr" },
+    { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/profile.php?id=61588201962589" },
+    { name: "WhatsApp", icon: MessageCircle, url: "https://wa.me/447488372418" },
   ];
 
   return (
@@ -14,16 +15,17 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
           {/* Company Info */}
-          <div>
-            <div className="mb-6">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="mb-8 w-full flex justify-center md:justify-start">
               <Link to="/" className="inline-block transition-transform hover:scale-105 duration-300">
                 <img
-                  src={logoImage}
-                  alt="Zarkoon Security Limited"
+                  src={silverLogo}
+                  alt="Zarkoon Security Services"
                   className="h-16 md:h-20 w-auto object-contain"
                 />
               </Link>
             </div>
+
             <p className="text-gray-400 text-sm font-light mb-8 leading-relaxed">
               When it comes to protecting your business and ensuring peace of mind, look no further than Zarkoon Security Limited.
             </p>
@@ -60,7 +62,7 @@ export function Footer() {
               <div className="flex items-start gap-3 group">
                 <Phone className="w-4 h-4 text-[#5DADE2] flex-shrink-0 mt-1 transition-transform group-hover:scale-110" />
                 <div className="text-sm font-light">
-                  <p className="text-gray-400">Phone: <a href="tel:+447466493229" className="hover:text-[#5DADE2] transition-colors font-medium">07466493229</a></p>
+                  <p className="text-gray-400">Phone: <a href="tel:+447488372418" className="hover:text-[#5DADE2] transition-colors font-medium">07488 372418</a></p>
                 </div>
               </div>
               <div className="flex items-start gap-3 group">
@@ -92,10 +94,14 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="text-center">
-            <p className="text-sm font-light text-gray-500">
-              Copyrights @ 2025. ZARKOON SECURITY LIMITED
+        <div className="border-t border-gray-800/50 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <p className="text-[10px] md:text-xs font-light text-gray-400 tracking-wide">
+              Registered In England And Wales, Company Number: 09761794
+            </p>
+
+            <p className="text-[10px] md:text-xs font-light text-gray-500 tracking-wider uppercase">
+              © 2026 - ZARKOON SECURITY LIMITED. All Rights Reserved.
             </p>
           </div>
         </div>

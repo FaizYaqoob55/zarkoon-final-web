@@ -13,7 +13,7 @@ import {
     SelectValue,
 } from "../components/ui/select";
 
-import heroImage from "../../assets/security-concierge.jpg";
+import heroImage from "../../assets/security-professional.jpg";
 import receptionRoleImage from "../../assets/25e965_2f72110096454ad6ab8d1f9df53a99a2~mv2.avif";
 import trustedCompanyImage from "../../assets/Hotel-Security-Guards.docx.jpg";
 
