@@ -119,22 +119,22 @@ export function Vacancies() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Create FormData object
     const formData = new FormData(e.currentTarget);
-    
+
     // Append unique subject for Gmail threading
     formData.append("_subject", `New CV: ${fullName} [${new Date().toLocaleTimeString()}]`);
-    
+
     try {
-      const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
         method: "POST",
         body: formData, // Browser will handle boundaries for multipart/form-data
         headers: {
           'Accept': 'application/json'
         }
       });
-      
+
       if (response.ok) {
         setIsSubmitted(true);
         // Reset form states
@@ -216,12 +216,12 @@ export function Vacancies() {
           <h2 className="text-[#0A1929] text-4xl md:text-5xl font-extrabold mb-10 tracking-tight">
             Join the <span className="text-[#1E5A8E]">Zarkoon Team</span>
           </h2>
-          
+
           <div className="bg-[#F8FAFC] border-2 border-dashed border-[#1E5A8E]/20 rounded-[2rem] p-10 mb-16 shadow-inner">
             <p className="text-gray-600 text-xl font-light leading-relaxed">
-              Zarkoon Security Limited is always looking for dedicated, licensed professionals 
-              to join our expanding team. If you are passionate about security and meet our high standards, 
-              please use the portal below to submit your details and CV. Our recruitment team reviews all 
+              Zarkoon Security Limited is always looking for dedicated, licensed professionals
+              to join our expanding team. If you are passionate about security and meet our high standards,
+              please use the portal below to submit your details and CV. Our recruitment team reviews all
               submissions within 48 hours.
             </p>
           </div>
@@ -276,116 +276,116 @@ export function Vacancies() {
 
             {/* Right Simulation Form */}
             <div className="lg:w-1/2 p-12 md:p-16 bg-[#1C2B3A] relative">
-                  <div className="mb-10 flex items-center justify-between">
-                    <h3 className="text-white text-xl font-bold">Quick Application</h3>
-                    <span className="text-[#5DADE2] text-xs font-bold tracking-widest uppercase">Step 1 of 2</span>
+              <div className="mb-10 flex items-center justify-between">
+                <h3 className="text-white text-xl font-bold">Quick Application</h3>
+                <span className="text-[#5DADE2] text-xs font-bold tracking-widest uppercase">Step 1 of 2</span>
+              </div>
+
+              {isSubmitted ? (
+                <div className="bg-green-500/10 border border-green-500/50 rounded-2xl p-10 text-center animate-in fade-in zoom-in duration-500">
+                  <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
+                  <h3 className="text-white text-3xl font-bold mb-4">Thank you!</h3>
+                  <p className="text-white/60 mb-8 leading-relaxed">
+                    Your application and CV have been received. Our recruitment team will review your details and contact you soon.
+                  </p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-8 text-[#5DADE2] hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
+                  >
+                    Send Another Application
+                  </button>
+                </div>
+              ) : (
+                <form
+                  className="space-y-6"
+                  onSubmit={handleFormSubmit}
+                >
+                  {/* FormSubmit Configuration */}
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="text" name="_honey" style={{ display: 'none' }} />
+                  <input type="hidden" name="Position" value={selectedJob || "General Application"} />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Full Name *</label>
+                      <input
+                        type="text"
+                        name="Full_Name"
+                        value={fullName}
+                        onChange={(e) => { setFullName(e.target.value); setErrors(errors.filter(err => err !== 'fullName')); }}
+                        className={`w-full bg-[#0A1929] border ${errors.includes('fullName') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`}
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">SIA License Number</label>
+                      <input
+                        type="text"
+                        name="SIA_Number"
+                        value={siaNumber}
+                        onChange={(e) => setSiaNumber(e.target.value)}
+                        className="w-full bg-[#0A1929] border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all"
+                        placeholder="1234 5678 9012"
+                      />
+                    </div>
                   </div>
 
-                  {isSubmitted ? (
-                    <div className="bg-green-500/10 border border-green-500/50 rounded-2xl p-10 text-center animate-in fade-in zoom-in duration-500">
-                      <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
-                        <h3 className="text-white text-3xl font-bold mb-4">Thank you!</h3>
-                        <p className="text-white/60 mb-8 leading-relaxed">
-                          Your application and CV have been received. Our recruitment team will review your details and contact you soon.
-                        </p>
-                      <button 
-                        onClick={() => setIsSubmitted(false)}
-                        className="mt-8 text-[#5DADE2] hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
-                      >
-                        Send Another Application
-                      </button>
-                    </div>
-                  ) : (
-                    <form 
-                      className="space-y-6" 
-                      onSubmit={handleFormSubmit}
-                    >
-                      {/* FormSubmit Configuration */}
-                      <input type="hidden" name="_captcha" value="false" />
-                      <input type="text" name="_honey" style={{ display: 'none' }} />
-                      <input type="hidden" name="Position" value={selectedJob || "General Application"} />
+                  <div className="space-y-2">
+                    <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Email Address *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => { setEmail(e.target.value); setErrors(errors.filter(err => err !== 'email')); }}
+                      className={`w-full bg-[#0A1929] border ${errors.includes('email') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`}
+                      placeholder="name@email.com"
+                      required
+                    />
+                  </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Full Name *</label>
-                        <input 
-                          type="text" 
-                          name="Full_Name"
-                          value={fullName}
-                          onChange={(e) => { setFullName(e.target.value); setErrors(errors.filter(err => err !== 'fullName')); }}
-                          className={`w-full bg-[#0A1929] border ${errors.includes('fullName') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`} 
-                          placeholder="John Doe" 
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">SIA License Number</label>
-                        <input 
-                          type="text" 
-                          name="SIA_Number"
-                          value={siaNumber}
-                          onChange={(e) => setSiaNumber(e.target.value)}
-                          className="w-full bg-[#0A1929] border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all" 
-                          placeholder="1234 5678 9012" 
-                        />
-                      </div>
-                    </div>
+                  <label className={`block h-40 border-2 border-dashed ${errors.includes('cvFile') ? 'border-red-500 bg-red-500/5' : 'border-white/10 hover:border-[#5DADE2]'} rounded-xl flex flex-col items-center justify-center transition-colors group cursor-pointer relative overflow-hidden`}>
+                    <input
+                      type="file"
+                      name="attachment"
+                      accept=".pdf,.doc,.docx"
+                      onChange={handleFileChange}
+                      className="hidden"
+                      required
+                    />
+                    {cvFile ? (
+                      <>
+                        <CheckCircle className="w-8 h-8 text-green-500 mb-3" />
+                        <span className="text-white font-medium text-center px-4 overflow-hidden text-ellipsis w-[90%] whitespace-nowrap">{cvFile.name}</span>
+                        <span className="text-white/40 text-xs mt-1">{(cvFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className={`w-8 h-8 ${errors.includes('cvFile') ? 'text-red-400' : 'text-white/20 group-hover:text-[#5DADE2]'} mb-3 transition-colors`} />
+                        <span className={`${errors.includes('cvFile') ? 'text-red-400' : 'text-white/40 group-hover:text-white'} transition-colors font-medium`}>
+                          {errors.includes('cvFile') ? 'CV Document Required *' : 'Click to upload CV (PDF/DOC)'}
+                        </span>
+                      </>
+                    )}
+                  </label>
 
-                    <div className="space-y-2">
-                      <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Email Address *</label>
-                      <input 
-                        type="email" 
-                        name="email"
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value); setErrors(errors.filter(err => err !== 'email')); }}
-                        className={`w-full bg-[#0A1929] border ${errors.includes('email') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`} 
-                        placeholder="name@email.com" 
-                        required
-                      />
-                    </div>
-
-                    <label className={`block h-40 border-2 border-dashed ${errors.includes('cvFile') ? 'border-red-500 bg-red-500/5' : 'border-white/10 hover:border-[#5DADE2]'} rounded-xl flex flex-col items-center justify-center transition-colors group cursor-pointer relative overflow-hidden`}>
-                      <input 
-                        type="file" 
-                        name="attachment"
-                        accept=".pdf,.doc,.docx" 
-                        onChange={handleFileChange} 
-                        className="hidden" 
-                        required
-                      />
-                      {cvFile ? (
-                        <>
-                          <CheckCircle className="w-8 h-8 text-green-500 mb-3" />
-                          <span className="text-white font-medium text-center px-4 overflow-hidden text-ellipsis w-[90%] whitespace-nowrap">{cvFile.name}</span>
-                          <span className="text-white/40 text-xs mt-1">{(cvFile.size / 1024 / 1024).toFixed(2)} MB</span>
-                        </>
-                      ) : (
-                        <>
-                          <Upload className={`w-8 h-8 ${errors.includes('cvFile') ? 'text-red-400' : 'text-white/20 group-hover:text-[#5DADE2]'} mb-3 transition-colors`} />
-                          <span className={`${errors.includes('cvFile') ? 'text-red-400' : 'text-white/40 group-hover:text-white'} transition-colors font-medium`}>
-                            {errors.includes('cvFile') ? 'CV Document Required *' : 'Click to upload CV (PDF/DOC)'}
-                          </span>
-                        </>
-                      )}
-                    </label>
-
-                    <button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full bg-[#D4AF37] hover:bg-white text-[#0A1929] font-black py-4 rounded-xl uppercase tracking-widest flex items-center justify-center gap-3 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          Sending... <Loader2 className="w-5 h-5 animate-spin" />
-                        </>
-                      ) : (
-                        <>
-                          Submit Interest <Send className="w-5 h-5" />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                  )}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#D4AF37] hover:bg-white text-[#0A1929] font-black py-4 rounded-xl uppercase tracking-widest flex items-center justify-center gap-3 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        Sending... <Loader2 className="w-5 h-5 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Submit Interest <Send className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

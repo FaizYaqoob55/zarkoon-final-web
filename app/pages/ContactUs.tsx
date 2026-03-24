@@ -17,22 +17,22 @@ export function ContactUs() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const formData = new FormData(e.currentTarget);
     const name = formData.get("Name") || "New Inquiry";
-    
+
     // Ensure unique subject
     formData.append("_subject", `New Website Inquiry: ${name} [${new Date().toLocaleTimeString()}]`);
-    
+
     try {
-      const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
         method: "POST",
         body: formData,
         headers: {
           'Accept': 'application/json'
         }
       });
-      
+
       if (response.ok) {
         setIsSubmitted(true);
       } else {
@@ -214,13 +214,13 @@ export function ContactUs() {
         <div className="bg-gradient-to-br from-[#E8F4F8] to-white p-12 lg:p-16 flex items-center">
           <div className="w-full max-w-lg mx-auto">
             <h2 className="text-3xl font-bold text-[#0A1929] mb-8">Send us a message</h2>
-            
+
             {isSubmitted ? (
               <div className="bg-white p-12 rounded-xl shadow-xl border-t-4 border-t-green-500 text-center animate-in fade-in zoom-in duration-500">
                 <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
                 <h3 className="text-2xl font-bold text-[#0A1929] mb-4">Thank You!</h3>
                 <p className="text-gray-600 mb-8">Your message has been sent successfully. We will get back to you shortly.</p>
-                <button 
+                <button
                   onClick={() => setIsSubmitted(false)}
                   className="text-[#5DADE2] font-bold uppercase tracking-widest hover:text-[#0A1929] transition-colors"
                 >
@@ -228,7 +228,7 @@ export function ContactUs() {
                 </button>
               </div>
             ) : (
-              <form 
+              <form
                 onSubmit={handleFormSubmit}
                 className="space-y-6"
               >
@@ -237,78 +237,78 @@ export function ContactUs() {
                 <input type="text" name="_honey" style={{ display: 'none' }} />
                 <input type="hidden" name="Source" value="Contact Us Page" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Name Field */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name Field */}
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
+                      Name*
+                    </label>
+                    <Input
+                      name="Name"
+                      placeholder="E.g. John Doe"
+                      required
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
+                      Email Address*
+                    </label>
+                    <Input
+                      name="Email"
+                      placeholder="E.g. john@example.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Contact Number Field */}
                 <div className="space-y-2">
-                  <label htmlFor="name" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
-                    Name*
+                  <label htmlFor="phone" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
+                    Contact Number*
                   </label>
                   <Input
-                    name="Name"
-                    placeholder="E.g. John Doe"
+                    name="Phone"
+                    placeholder="E.g. 07488 372418"
                     required
                   />
                 </div>
 
-                {/* Email Field */}
+                {/* Message Field */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
-                    Email Address*
+                  <label htmlFor="message" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
+                    Message*
                   </label>
-                  <Input
-                    name="Email"
-                    placeholder="E.g. john@example.com"
+                  <Textarea
+                    name="Message"
+                    placeholder="How can we help you today?"
                     required
                   />
                 </div>
-              </div>
-
-              {/* Contact Number Field */}
-              <div className="space-y-2">
-                <label htmlFor="phone" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
-                  Contact Number*
-                </label>
-                <Input
-                  name="Phone"
-                  placeholder="E.g. 07488 372418"
-                  required
-                />
-              </div>
-
-              {/* Message Field */}
-              <div className="space-y-2">
-                <label htmlFor="message" className="block text-sm font-bold text-[#0A1929] uppercase tracking-wider">
-                  Message*
-                </label>
-                <Textarea
-                  name="Message"
-                  placeholder="How can we help you today?"
-                  required
-                />
-              </div>
 
 
-              {/* Required Fields Notice */}
-              <p className="text-xs text-gray-500 font-medium italic">
-                * Please ensure all required fields are completed
-              </p>
+                {/* Required Fields Notice */}
+                <p className="text-xs text-gray-500 font-medium italic">
+                  * Please ensure all required fields are completed
+                </p>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-[#1E5A8E] hover:bg-[#154670] text-white font-bold py-5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? (
-                  <>
-                    Sending... <Loader2 className="w-5 h-5 ml-2 animate-spin" />
-                  </>
-                ) : (
-                  "Send Message"
-                )}
-              </Button>
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#1E5A8E] hover:bg-[#154670] text-white font-bold py-5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      Sending... <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                    </>
+                  ) : (
+                    "Send Message"
+                  )}
+                </Button>
 
-            </form>
+              </form>
             )}
           </div>
         </div>

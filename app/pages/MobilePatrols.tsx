@@ -29,7 +29,7 @@ export function MobilePatrols() {
         formData.append("_subject", `Service Quote: Mobile Patrols - ${name} [${new Date().toLocaleTimeString()}]`);
         
         try {
-            const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
+            const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
                 method: "POST",
                 body: formData,
                 headers: {

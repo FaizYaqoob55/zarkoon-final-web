@@ -118,12 +118,23 @@ export function AboutUs() {
                   We are dedicated to ensuring that there is no modern slavery or human trafficking in our business or our supply chains. This statement reflects our commitment to acting ethically and with integrity in all our business relationships.
                 </p>
               </div>
-              <a
-                href="#"
-                className="inline-block bg-[#1E5A8E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#163D5E] transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                Read Full Statement
-              </a>
+              <div className="flex flex-col items-start gap-3">
+                <a
+                  href="/policies/ZSL-POL-15-Modern-Slavery-Policy.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-[#1E5A8E] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#163D5E] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Read Full Statement
+                </a>
+                <a 
+                  href="/policies/ZSL-POL-15-Modern-Slavery-Policy.pdf" 
+                  download 
+                  className="text-sm text-[#1E5A8E] hover:underline"
+                >
+                  Click here to download the PDF if it doesn't load
+                </a>
+              </div>
             </div>
           </div>
         </div>
