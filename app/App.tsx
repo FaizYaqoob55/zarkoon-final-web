@@ -96,6 +96,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/contact-us/" element={<ContactUs />} />
           <Route path="/manned-guarding" element={<MannedGuarding />} />
           <Route path="/event-security" element={<EventSecurity />} />
           <Route path="/key-holding" element={<KeyHolding />} />
@@ -107,6 +108,7 @@ export default function App() {
           <Route path="/accreditations" element={<Accreditations />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="/careers" element={<Vacancies />} />
+          <Route path="/careers/" element={<Vacancies />} />
           <Route path="/training-portal" element={<TrainingPortal />} />
         </Route>
       </Routes>

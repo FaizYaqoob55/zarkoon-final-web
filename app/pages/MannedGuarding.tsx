@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Shield, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Shield, CheckCircle, ShieldCheck } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
@@ -14,54 +14,38 @@ import {
 import heroImage from "../../assets/manned-guarding-services.jpeg";
 
 export function MannedGuarding() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        postCode: "",
-        service: "",
-        address: "",
-        message: "",
-    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (/^[0-9+]*$/.test(value)) {
-            setFormData({ ...formData, phone: value });
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const payload = {
-            access_key: "af723e95-d9b7-4f0d-bb63-2f9abb2aa3fa",
-            subject: "New Manned Guarding Quote Request - Zarkoon Security",
-            from_name: "Manned Guarding Quote Form",
-            Name: formData.name,
-            Email: formData.email,
-            Phone: formData.phone,
-            PostCode: formData.postCode,
-            Service: formData.service,
-            Address: formData.address,
-            Message: formData.message,
-        };
+        setIsSubmitting(true);
+        
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get("Name") || "Customer";
+        
+        // Unique Subject
+        formData.append("_subject", `Service Quote: Manned Guarding - ${name} [${new Date().toLocaleTimeString()}]`);
+        
         try {
-            const response = await fetch("https://api.web3forms.com/submit", {
+            const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
                 method: "POST",
-                body: JSON.stringify(payload),
-                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: formData
             });
-            const data = await response.json();
-            if (data.success) {
-                alert("Thank you! Your message has been received. We will get back to you shortly.");
-                setFormData({ name: "", email: "", phone: "", postCode: "", service: "", address: "", message: "" });
+            
+            if (response.ok) {
+                setIsSubmitted(true);
             } else {
-                alert("Oops! There was a problem submitting your form: " + (data.message || "Unknown error"));
+                alert("Something went wrong, please try again.");
             }
-        } catch {
-            alert("Oops! There was a problem submitting your form.");
+        } catch (error) {
+            console.error("Submission error:", error);
+            alert("Something went wrong, please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
+
 
     const socialLinks = [
         { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/company/zarkoon-security-limited" },
@@ -152,12 +136,35 @@ export function MannedGuarding() {
                             <h3 className="text-3xl font-bold mb-2">Get A Free Quote</h3>
                             <p className="text-[#5DADE2] font-light text-sm uppercase tracking-widest">Response within 60 minutes</p>
                         </div>
-                        <form onSubmit={handleSubmit} className="p-10 space-y-6">
+                        {isSubmitted ? (
+                            <div className="p-16 text-center animate-in fade-in zoom-in duration-500">
+                                <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-green-500/50">
+                                    <ShieldCheck className="w-10 h-10 text-green-500" />
+                                </div>
+                                <h3 className="text-white text-3xl font-bold mb-4 tracking-tight">Thank You!</h3>
+                                <p className="text-[#5DADE2] text-lg mb-10 font-light leading-relaxed">
+                                    Your request for a Manned Guarding quote has been received. Our team will review your requirements and contact you shortly.
+                                </p>
+                                <button 
+                                    onClick={() => setIsSubmitted(false)}
+                                    className="text-white font-black uppercase tracking-widest text-sm hover:text-[#5DADE2] transition-colors"
+                                >
+                                    request another quote
+                                </button>
+                            </div>
+                        ) : (
+                            <form 
+                                onSubmit={handleFormSubmit}
+                                className="p-10 space-y-6"
+                            >
+                                {/* FormSubmit Configuration */}
+                                <input type="hidden" name="_captcha" value="false" />
+                                <input type="hidden" name="Source" value="Manned Guarding Quote Form" />
+
                             <div className="space-y-2">
                                 <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Full Name</label>
                                 <Input
-                                    value={formData.name}
-                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    name="Name"
                                     required
                                     placeholder="E.g. John Doe"
                                     className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929]"
@@ -169,8 +176,7 @@ export function MannedGuarding() {
                                     <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Email</label>
                                     <Input
                                         type="email"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        name="Email"
                                         required
                                         placeholder="john@example.com"
                                         className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929]"
@@ -180,8 +186,7 @@ export function MannedGuarding() {
                                     <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Phone Number</label>
                                     <Input
                                         type="tel"
-                                        value={formData.phone}
-                                        onChange={handlePhoneChange}
+                                        name="Phone"
                                         required
                                         placeholder="07488 372418"
                                         className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929]"
@@ -193,20 +198,16 @@ export function MannedGuarding() {
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Post Code</label>
                                     <Input
-                                        type="number"
-                                        value={formData.postCode}
-                                        onChange={(e) => setFormData({ ...formData, postCode: e.target.value })}
+                                        type="text"
+                                        name="PostCode"
                                         required
                                         placeholder="12345"
-                                        className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-auto [&::-webkit-inner-spin-button]:appearance-auto"
+                                        className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929]"
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Select Service</label>
-                                    <Select
-                                        value={formData.service}
-                                        onValueChange={(value) => setFormData({ ...formData, service: value })}
-                                    >
+                                    <Select name="Service">
                                         <SelectTrigger className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929] h-11">
                                             <SelectValue placeholder="Selection Service" />
                                         </SelectTrigger>
@@ -228,8 +229,7 @@ export function MannedGuarding() {
                             <div className="space-y-2">
                                 <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Site Address</label>
                                 <Input
-                                    value={formData.address}
-                                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                                    name="SiteAddress"
                                     required
                                     placeholder="Full site location"
                                     className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929]"
@@ -238,8 +238,7 @@ export function MannedGuarding() {
                             <div className="space-y-2">
                                 <label className="block text-sm font-bold text-[#5DADE2] uppercase tracking-wider">Message</label>
                                 <Textarea
-                                    value={formData.message}
-                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                    name="Message"
                                     required
                                     placeholder="Tell us about your security requirements"
                                     className="bg-white border-2 border-gray-400 focus:border-[#5DADE2] text-[#0A1929] min-h-[100px]"
@@ -247,11 +246,13 @@ export function MannedGuarding() {
                             </div>
                             <Button
                                 type="submit"
-                                className="w-full bg-[#1E5A8E] hover:bg-[#5DADE2] text-white h-14 rounded-xl font-bold text-lg shadow-xl transition-all duration-300 transform hover:-translate-y-1 uppercase tracking-widest border-2 border-[#5DADE2]/30"
+                                disabled={isSubmitting}
+                                className="w-full bg-[#1E5A8E] hover:bg-[#5DADE2] text-white h-14 rounded-xl font-bold text-lg shadow-xl transition-all duration-300 transform hover:-translate-y-1 uppercase tracking-widest border-2 border-[#5DADE2]/30 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Request Quote
+                                {isSubmitting ? "Sending..." : "Request Quote"}
                             </Button>
                         </form>
+                        )}
                     </div>
                 </div>
             </section>

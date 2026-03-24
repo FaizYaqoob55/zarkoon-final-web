@@ -93,7 +93,7 @@ export function Vacancies() {
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // File Upload Logic
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,56 +112,41 @@ export function Vacancies() {
       alert("Invalid file format. Please upload PDF, DOC, or DOCX.");
       return;
     }
-
     setCvFile(file);
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  // Form Submission Logic
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newErrors: string[] = [];
-    if (!fullName.trim()) newErrors.push("fullName");
-    if (!email.trim()) newErrors.push("email");
-    if (!cvFile) newErrors.push("cvFile");
-
-    if (newErrors.length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setErrors([]);
     setIsSubmitting(true);
-
-    const payload = {
-      access_key: "af723e95-d9b7-4f0d-bb63-2f9abb2aa3fa",
-      subject: "New Job Application - Zarkoon Security",
-      from_name: "Vacancies Application Form",
-      Position: selectedJob || "General Application",
-      Name: fullName,
-      SIA_Number: siaNumber,
-      Email: email,
-      CV_File: cvFile ? cvFile.name : "Not provided",
-    };
-
+    
+    // Create FormData object
+    const formData = new FormData(e.currentTarget);
+    
+    // Append unique subject for Gmail threading
+    formData.append("_subject", `New CV: ${fullName} [${new Date().toLocaleTimeString()}]`);
+    
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
         method: "POST",
-        body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: formData
       });
-      setIsSubmitting(false);
-      const data = await response.json();
-      if (data.success) {
-        setIsSuccess(true);
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        // Reset form states
         setFullName("");
         setSiaNumber("");
         setEmail("");
         setCvFile(null);
       } else {
-        alert("Oops! There was a problem submitting your application: " + (data.message || "Unknown error"));
+        alert("Something went wrong, please try again.");
       }
-    } catch {
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Something went wrong, please try again.");
+    } finally {
       setIsSubmitting(false);
-      alert("Oops! There was a problem submitting your application.");
     }
   };
 
@@ -288,46 +273,50 @@ export function Vacancies() {
 
             {/* Right Simulation Form */}
             <div className="lg:w-1/2 p-12 md:p-16 bg-[#1C2B3A] relative">
-              {isSuccess ? (
-                <div className="flex flex-col items-center justify-center text-center h-full animate-in fade-in zoom-in duration-500 min-h-[400px]">
-                  <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle className="w-10 h-10 text-green-500" />
-                  </div>
-                  <h3 className="text-white text-3xl font-bold mb-4">Application Successful!</h3>
-                  <p className="text-white/70 text-lg mb-8 leading-relaxed">
-                    Your CV has been submitted successfully to <br/>
-                    <span className="text-white font-bold">Zarkoon Security Limited</span>.
-                  </p>
-                  <button 
-                    onClick={() => setIsSuccess(false)}
-                    className="bg-[#1E5A8E] hover:bg-[#5DADE2] text-white px-8 py-3 rounded-xl font-bold italic tracking-widest uppercase transition-colors"
-                  >
-                    Submit Another
-                  </button>
-                </div>
-              ) : (
-                <>
                   <div className="mb-10 flex items-center justify-between">
                     <h3 className="text-white text-xl font-bold">Quick Application</h3>
                     <span className="text-[#5DADE2] text-xs font-bold tracking-widest uppercase">Step 1 of 2</span>
                   </div>
 
-                  <form className="space-y-6" onSubmit={handleFormSubmit}>
+                  {isSubmitted ? (
+                    <div className="bg-green-500/10 border border-green-500/50 rounded-2xl p-10 text-center animate-in fade-in zoom-in duration-500">
+                      <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
+                      <h3 className="text-white text-2xl font-bold mb-2">Thank you!</h3>
+                      <p className="text-gray-300">Your application has been sent successfully.</p>
+                      <button 
+                        onClick={() => setIsSubmitted(false)}
+                        className="mt-8 text-[#5DADE2] hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
+                      >
+                        Send Another Application
+                      </button>
+                    </div>
+                  ) : (
+                    <form 
+                      className="space-y-6" 
+                      onSubmit={handleFormSubmit}
+                    >
+                      {/* FormSubmit Configuration */}
+                      <input type="hidden" name="_captcha" value="false" />
+                      <input type="hidden" name="Position" value={selectedJob || "General Application"} />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Full Name *</label>
                         <input 
                           type="text" 
+                          name="Full_Name"
                           value={fullName}
                           onChange={(e) => { setFullName(e.target.value); setErrors(errors.filter(err => err !== 'fullName')); }}
                           className={`w-full bg-[#0A1929] border ${errors.includes('fullName') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`} 
                           placeholder="John Doe" 
+                          required
                         />
                       </div>
                       <div className="space-y-2">
                         <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">SIA License Number</label>
                         <input 
                           type="text" 
+                          name="SIA_Number"
                           value={siaNumber}
                           onChange={(e) => setSiaNumber(e.target.value)}
                           className="w-full bg-[#0A1929] border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all" 
@@ -340,19 +329,23 @@ export function Vacancies() {
                       <label className="text-white/40 text-xs font-bold uppercase tracking-widest ml-1">Email Address *</label>
                       <input 
                         type="email" 
+                        name="email"
                         value={email}
                         onChange={(e) => { setEmail(e.target.value); setErrors(errors.filter(err => err !== 'email')); }}
                         className={`w-full bg-[#0A1929] border ${errors.includes('email') ? 'border-red-500' : 'border-white/10'} rounded-lg p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-all`} 
                         placeholder="name@email.com" 
+                        required
                       />
                     </div>
 
                     <label className={`block h-40 border-2 border-dashed ${errors.includes('cvFile') ? 'border-red-500 bg-red-500/5' : 'border-white/10 hover:border-[#5DADE2]'} rounded-xl flex flex-col items-center justify-center transition-colors group cursor-pointer relative overflow-hidden`}>
                       <input 
                         type="file" 
+                        name="CV_Attachment"
                         accept=".pdf,.doc,.docx" 
                         onChange={handleFileChange} 
                         className="hidden" 
+                        required
                       />
                       {cvFile ? (
                         <>
@@ -373,17 +366,20 @@ export function Vacancies() {
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-[#D4AF37] disabled:opacity-70 disabled:cursor-not-allowed hover:bg-white text-[#0A1929] font-black py-4 rounded-xl uppercase tracking-widest flex items-center justify-center gap-3 transition-all"
+                      className="w-full bg-[#D4AF37] hover:bg-white text-[#0A1929] font-black py-4 rounded-xl uppercase tracking-widest flex items-center justify-center gap-3 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
-                        <>Processing <Loader2 className="w-5 h-5 animate-spin" /></>
+                        <>
+                          Sending... <Loader2 className="w-5 h-5 animate-spin" />
+                        </>
                       ) : (
-                        <>Submit Interest <Send className="w-5 h-5" /></>
+                        <>
+                          Submit Interest <Send className="w-5 h-5" />
+                        </>
                       )}
                     </button>
                   </form>
-                </>
-              )}
+                  )}
             </div>
           </div>
         </div>

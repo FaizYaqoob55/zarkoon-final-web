@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Clock, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Clock, MessageCircle, CheckCircle, Loader2, Send } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
@@ -8,44 +8,40 @@ import { Button } from "../components/ui/button";
 const heroImage = "https://images.unsplash.com/photo-1768796365086-a030a51d10b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzZWN1cml0eSUyMHBlcnNvbm5lbCUyMHByb2Zlc3Npb25hbCUyMG91dGRvb3J8ZW58MXx8fHwxNzcyNzAxNTEwfDA&ixlib=rb-4.1.0&q=80&w=1080";
 
 export function ContactUs() {
-  const [result, setResult] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setResult(null);
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const object = Object.fromEntries(data.entries());
-
-    // Web3Forms config
-    object.access_key = "af723e95-d9b7-4f0d-bb63-2f9abb2aa3fa";
-    object.subject = "New Contact Message - Zarkoon Security";
-    object.from_name = "Contact Us Page";
-
-    const json = JSON.stringify(object);
-
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("Name") || "New Inquiry";
+    
+    // Ensure unique subject
+    formData.append("_subject", `New Website Inquiry: ${name} [${new Date().toLocaleTimeString()}]`);
+    
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
         method: "POST",
-        body: json,
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        }
+        body: formData
       });
-
-      const data = await response.json();
-      if (data.success) {
-        setResult({ type: "success", message: "Thank you! Your message has been received. We will get back to you shortly." });
-        form.reset();
+      
+      if (response.ok) {
+        setIsSubmitted(true);
       } else {
-        setResult({ type: "error", message: "Oops! There was a problem submitting your form: " + (data.message || "Unknown error") });
+        alert("Something went wrong, please try again.");
       }
-    } catch {
-      setResult({ type: "error", message: "Oops! There was a problem submitting your form." });
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Something went wrong, please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
 
   const socialLinks = [
     { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/company/zarkoon-security-limited" },
@@ -215,10 +211,28 @@ export function ContactUs() {
         <div className="bg-gradient-to-br from-[#E8F4F8] to-white p-12 lg:p-16 flex items-center">
           <div className="w-full max-w-lg mx-auto">
             <h2 className="text-3xl font-bold text-[#0A1929] mb-8">Send us a message</h2>
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-6"
-            >
+            
+            {isSubmitted ? (
+              <div className="bg-white p-12 rounded-xl shadow-xl border-t-4 border-t-green-500 text-center animate-in fade-in zoom-in duration-500">
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-[#0A1929] mb-4">Thank You!</h3>
+                <p className="text-gray-600 mb-8">Your message has been sent successfully. We will get back to you shortly.</p>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="text-[#5DADE2] font-bold uppercase tracking-widest hover:text-[#0A1929] transition-colors"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <form 
+                onSubmit={handleFormSubmit}
+                className="space-y-6"
+              >
+                {/* FormSubmit Configuration */}
+                <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="Source" value="Contact Us Page" />
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name Field */}
                 <div className="space-y-2">
@@ -226,11 +240,9 @@ export function ContactUs() {
                     Name*
                   </label>
                   <Input
-                    id="name"
                     name="Name"
-                    type="text"
-                    required
                     placeholder="E.g. John Doe"
+                    required
                   />
                 </div>
 
@@ -240,11 +252,9 @@ export function ContactUs() {
                     Email Address*
                   </label>
                   <Input
-                    id="email"
                     name="Email"
-                    type="email"
-                    required
                     placeholder="E.g. john@example.com"
+                    required
                   />
                 </div>
               </div>
@@ -255,11 +265,9 @@ export function ContactUs() {
                   Contact Number*
                 </label>
                 <Input
-                  id="phone"
                   name="Phone"
-                  type="tel"
-                  required
                   placeholder="E.g. 07488 372418"
+                  required
                 />
               </div>
 
@@ -269,10 +277,9 @@ export function ContactUs() {
                   Message*
                 </label>
                 <Textarea
-                  id="message"
                   name="Message"
-                  required
                   placeholder="How can we help you today?"
+                  required
                 />
               </div>
 
@@ -285,18 +292,20 @@ export function ContactUs() {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-[#1E5A8E] hover:bg-[#154670] text-white font-bold py-5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg uppercase tracking-widest"
+                disabled={isSubmitting}
+                className="w-full bg-[#1E5A8E] hover:bg-[#154670] text-white font-bold py-5 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-lg uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    Sending... <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </Button>
 
-              {/* Result Message */}
-              {result && (
-                <p className={`text-sm font-semibold text-center mt-2 ${result.type === "success" ? "text-green-600" : "text-red-600"}`}>
-                  {result.message}
-                </p>
-              )}
             </form>
+            )}
           </div>
         </div>
       </section>

@@ -97,7 +97,7 @@ export function Footer() {
         <div className="border-t border-gray-800/50 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <p className="text-[10px] md:text-xs font-light text-gray-300 tracking-wide">
-              Registered In England And Wales, Company Number: <a href="/assets/certifications/certificate of incorporation.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-[#5DADE2] transition-colors font-medium border-b border-[#5DADE2]/30 hover:border-[#5DADE2]">17035579</a>
+              Registered In England And Wales, Company Number: <a href="/certificates/incorporation-cert.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-[#5DADE2] transition-colors font-medium border-b border-[#5DADE2]/30 hover:border-[#5DADE2]">17035579</a>
             </p>
 
             <p className="text-[10px] md:text-xs font-light text-gray-500 tracking-wider uppercase">

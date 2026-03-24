@@ -41,7 +41,7 @@ export function AffiliationsSection() {
             return isICO ? (
               <a 
                 key={idx} 
-                href="https://find-and-update.company-information.service.gov.uk/company/09761794" 
+                href="/certificates/ico-cert.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full"

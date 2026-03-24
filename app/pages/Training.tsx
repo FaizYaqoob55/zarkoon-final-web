@@ -79,6 +79,37 @@ const courses = [
 
 export function Training() {
    const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [isSubmitted, setIsSubmitted] = useState(false);
+
+   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      
+      const formData = new FormData(e.currentTarget);
+      const name = formData.get("Name") || "Student";
+      
+      // Unique Subject
+      formData.append("_subject", `Training Registration: ${selectedCourse} - ${name} [${new Date().toLocaleTimeString()}]`);
+      
+      try {
+         const response = await fetch("https://formsubmit.co/ajax/faizyaqoob55@gmail.com", {
+            method: "POST",
+            body: formData
+         });
+         
+         if (response.ok) {
+            setIsSubmitted(true);
+         } else {
+            alert("Something went wrong, please try again.");
+         }
+      } catch (error) {
+         console.error("Submission error:", error);
+         alert("Something went wrong, please try again.");
+      } finally {
+         setIsSubmitting(false);
+      }
+   };
 
    return (
       <div className="min-h-screen font-['Outfit'] bg-[#F4F6F9] pb-20">
@@ -330,49 +361,43 @@ export function Training() {
                         </button>
                      </div>
 
-                     <form className="space-y-6" onSubmit={async (e) => {
-                      e.preventDefault();
-                      const form = e.currentTarget;
-                      const fd = new FormData(form);
-                      const payload = {
-                        access_key: "af723e95-d9b7-4f0d-bb63-2f9abb2aa3fa",
-                        subject: "New Training Registration - Zarkoon Security",
-                        from_name: "Training Registration Form",
-                        Course: selectedCourse,
-                        Name: fd.get("name") as string,
-                        Phone: fd.get("phone") as string,
-                        Email: fd.get("email") as string,
-                      };
-                      try {
-                        const response = await fetch("https://api.web3forms.com/submit", {
-                          method: "POST",
-                          body: JSON.stringify(payload),
-                          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                        });
-                        const data = await response.json();
-                        if (data.success) {
-                           alert("Thank you! Your message has been received. We will get back to you shortly.");
-                           setSelectedCourse(null);
-                        } else {
-                           alert("Oops! There was a problem submitting your form: " + (data.message || "Unknown error"));
-                        }
-                      } catch {
-                        alert("Oops! There was a problem submitting your form.");
-                      }
-                   }}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                           <input type="text" name="name" placeholder="Your Full Name" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
-                           <input type="tel" name="phone" placeholder="Contact Number" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
+                     {isSubmitted ? (
+                        <div className="bg-white/5 backdrop-blur-md border border-green-500/50 rounded-2xl p-10 text-center animate-in fade-in zoom-in duration-500">
+                           <ShieldCheck className="w-12 h-12 text-green-500 mx-auto mb-4" />
+                           <h3 className="text-white text-2xl font-bold mb-2">Registration Sent!</h3>
+                           <p className="text-gray-400 mb-6 text-sm">Thank you! Your training request has been sent successfully. Our team will contact you shortly.</p>
+                           <button 
+                              onClick={() => setIsSubmitted(false)}
+                              className="text-[#D4AF37] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                           >
+                              Register for Another Course
+                           </button>
                         </div>
-                        <input type="email" name="email" placeholder="Email Address" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
+                     ) : (
+                        <form 
+                           onSubmit={handleFormSubmit}
+                           className="space-y-6"
+                        >
+                           {/* FormSubmit Configuration */}
+                           <input type="hidden" name="_captcha" value="false" />
+                           <input type="hidden" name="Course" value={selectedCourse || ""} />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <input type="text" name="Name" placeholder="Your Full Name" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
+                           <input type="tel" name="Phone" placeholder="Contact Number" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
+                        </div>
+                        <input type="email" name="Email" placeholder="Email Address" className="w-full bg-[#0A1929] border border-white/5 rounded-xl p-4 text-white focus:outline-none focus:border-[#D4AF37]" required />
 
                         <button
                            type="submit"
-                           className="w-full bg-[#D4AF37] hover:bg-white text-[#0A1929] font-black py-5 rounded-2xl flex items-center justify-center gap-4 transition-all uppercase tracking-widest shadow-xl"
+                           disabled={isSubmitting}
+                           className="w-full bg-[#D4AF37] hover:bg-white text-[#0A1929] font-black py-5 rounded-2xl flex items-center justify-center gap-4 transition-all uppercase tracking-widest shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                           <SendIcon className="w-5 h-5" /> Submit Registration
+                           {isSubmitting ? "Sending..." : "Submit Registration"}
+                           {!isSubmitting && <ArrowRight className="w-5 h-5" />}
                         </button>
                      </form>
+                     )}
 
                      <p className="text-center text-white/20 text-[10px] uppercase tracking-[0.2em] font-bold pt-8">
                         Zarkoon Security Limited Training Excellence
