@@ -24,43 +24,43 @@ const navigationSchema = {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Home",
-      "url": "https://www.zarkoon-security.co.uk/"
+      "url": "/"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "About Us",
-      "url": "https://www.zarkoon-security.co.uk/about"
+      "url": "/about"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Contact Us",
-      "url": "https://www.zarkoon-security.co.uk/contact-us"
+      "url": "/contact-us"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Manned Guarding",
-      "url": "https://www.zarkoon-security.co.uk/manned-guarding"
+      "url": "/manned-guarding"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Mobile Patrols",
-      "url": "https://www.zarkoon-security.co.uk/mobile-patrols"
+      "url": "/mobile-patrols"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Accreditations",
-      "url": "https://www.zarkoon-security.co.uk/accreditations"
+      "url": "/accreditations"
     },
     {
       "@type": "SiteNavigationElement",
       "@id": "#primary-navigation",
       "name": "Careers",
-      "url": "https://www.zarkoon-security.co.uk/careers"
+      "url": "/careers"
     }
   ]
 };
