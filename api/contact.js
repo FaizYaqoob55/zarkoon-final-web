@@ -83,7 +83,7 @@ export default async function handler(req, res) {
     const subjectToken = Array.isArray(parsedFields._subject) ? parsedFields._subject[0] : parsedFields._subject;
 
     const determinedFormType = formType || subjectToken || "Web Form";
-    const finalSubject = `Zarkoon Security - New ${determinedFormType} from ${senderName}`;
+    const finalSubject = `Zarkoon Security - New Inquiry (${determinedFormType}) from ${senderName}`;
 
     // Dynamically build the email body exactly as requested
     let dynamicBody = `Form Type: ${determinedFormType}\n`;
@@ -116,9 +116,6 @@ export default async function handler(req, res) {
     const file = Array.isArray(parsedFiles.attachment) ? parsedFiles.attachment[0] : parsedFiles.attachment;
 
     console.log("Setting up Nodemailer transporter...");
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
-      console.error("CRITICAL ERROR: Missing GMAIL_USER or GMAIL_PASS environment variables.");
-    }
 
     // Create Nodemailer transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
@@ -126,15 +123,15 @@ export default async function handler(req, res) {
       port: 465,
       secure: true,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: 'comedyboy834@gmail.com', // WARNING: Hardcoded for temporary testing
+        pass: 'gpwqkjhaglbnzgia', // WARNING: Hardcoded for temporary testing
       },
     });
 
     // Setup email data
     const mailOptions = {
-      from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER, // Send to yourself (client's email)
+      from: 'comedyboy834@gmail.com',
+      to: 'huzaifa.officialmail@gmail.com', // Hardcoded official client email
       replyTo: senderEmail,
       subject: finalSubject,
       text: dynamicBody,
@@ -148,15 +145,15 @@ export default async function handler(req, res) {
         : [],
     };
 
-    console.log(`Sending email to ${process.env.GMAIL_USER} for subject: ${finalSubject}`);
+    console.log("Attempting to send email via Gmail...");
     
     try {
       // Send the email
       const info = await transporter.sendMail(mailOptions);
       console.log("Email sent successfully: ", info.messageId);
-      return sendJson(res, 200, { success: true, message: "Application sent successfully!" });
+      return sendJson(res, 200, { success: true, message: "Email sent" });
     } catch (mailError) {
-      console.error("Nodemailer Send Error:", mailError);
+      console.error("SMTP Error Detail:", mailError);
       return sendJson(res, 500, { success: false, message: "Email delivery failed", error: mailError.message });
     }
 
