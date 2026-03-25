@@ -25,7 +25,7 @@ export function ContactUs() {
     formData.append("_subject", `New Website Inquiry: ${name} [${new Date().toLocaleTimeString()}]`);
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         body: formData,
         headers: {

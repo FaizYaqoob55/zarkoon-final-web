@@ -34,7 +34,7 @@ export function EventSecurity() {
         formData.append("_subject", `Service Quote: Event Security - ${name} [${new Date().toLocaleTimeString()}]`);
         
         try {
-            const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
+            const response = await fetch("/api/contact", {
                 method: "POST",
                 body: formData,
                 headers: {

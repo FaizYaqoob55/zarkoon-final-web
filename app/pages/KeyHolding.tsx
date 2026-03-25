@@ -31,7 +31,7 @@ export function KeyHolding() {
         formData.append("_subject", `Service Quote: Key Holding - ${name} [${new Date().toLocaleTimeString()}]`);
         
         try {
-            const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
+            const response = await fetch("/api/contact", {
                 method: "POST",
                 body: formData,
                 headers: {

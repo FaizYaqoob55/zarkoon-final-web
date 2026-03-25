@@ -123,13 +123,10 @@ export function Vacancies() {
     // Create FormData object
     const formData = new FormData(e.currentTarget);
 
-    // Append unique subject for Gmail threading
-    formData.append("_subject", `New CV: ${fullName} [${new Date().toLocaleTimeString()}]`);
-
     try {
-      const response = await fetch("https://formsubmit.co/ajax/comedyboy834@gmail.com", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formData, // Browser will handle boundaries for multipart/form-data
+        body: formData,
         headers: {
           'Accept': 'application/json'
         }
@@ -284,7 +281,7 @@ export function Vacancies() {
               {isSubmitted ? (
                 <div className="bg-green-500/10 border border-green-500/50 rounded-2xl p-10 text-center animate-in fade-in zoom-in duration-500">
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
-                  <h3 className="text-white text-3xl font-bold mb-4">Thank you!</h3>
+                  <h3 className="text-white text-3xl font-bold mb-4">Application Sent!</h3>
                   <p className="text-white/60 mb-8 leading-relaxed">
                     Your application and CV have been received. Our recruitment team will review your details and contact you soon.
                   </p>
