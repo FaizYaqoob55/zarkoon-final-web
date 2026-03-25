@@ -1,11 +1,12 @@
 import formidable from "formidable";
 import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-
-try {
-  dotenv.config();
-} catch (e) {
-  console.log("dotenv not found in production, relying on dashboard envs");
+if (process.env.NODE_ENV !== "production") {
+  try {
+    const dotenv = await import("dotenv");
+    dotenv.config();
+  } catch (e) {
+    console.log("dotenv config bypassed in production");
+  }
 }
 
 export const config = {
