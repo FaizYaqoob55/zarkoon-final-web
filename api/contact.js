@@ -1,15 +1,6 @@
 import formidable from "formidable";
 import nodemailer from "nodemailer";
 
-if (process.env.NODE_ENV !== "production") {
-  try {
-    const dotenv = await import("dotenv");
-    dotenv.config();
-  } catch (e) {
-    console.log("dotenv config bypassed in production");
-  }
-}
-
 export const config = {
   api: {
     bodyParser: false,
@@ -18,9 +9,6 @@ export const config = {
 };
 
 const sendJson = (res, statusCode, data) => {
-  if (typeof res.status === "function") {
-    return res.status(statusCode).json(data);
-  }
   res.statusCode = statusCode;
   res.setHeader("Content-Type", "application/json");
   return res.end(JSON.stringify(data));
@@ -30,119 +18,74 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  if (req.method === 'OPTIONS') return sendJson(res, 200, {});
+  if (req.method !== "POST") return sendJson(res, 405, { message: "Method Not Allowed" });
 
-  if (req.method === 'OPTIONS') {
-    return sendJson(res, 200, {});
-  }
-
-  if (req.method !== "POST") {
-    res.setHeader("Allow", ["POST", "OPTIONS"]);
-    return sendJson(res, 405, { message: `Method ${req.method} Not Allowed` });
-  }
-
-  const form = formidable({
-    keepExtensions: true,
-    maxFileSize: 5 * 1024 * 1024,
-  });
-
-  let parsedFields, parsedFiles;
+  const form = formidable({ keepExtensions: true, maxFileSize: 5 * 1024 * 1024 });
 
   try {
     const [fields, files] = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
-        if (err) {
-          console.error("Formidable Parse Error:", err);
-          reject(err);
-        } else {
-          resolve([fields, files]);
-        }
+        if (err) reject(err); else resolve([fields, files]);
       });
     });
-    parsedFields = fields;
-    parsedFiles = files;
-  } catch (parseError) {
-    console.error("Error during form parsing:", parseError);
-    return sendJson(res, 500, { success: false, message: "Form Parse failed", error: parseError.message });
-  }
 
-  try {
-    const fullName = Array.isArray(parsedFields.Full_Name) ? parsedFields.Full_Name[0] : parsedFields.Full_Name;
-    const nameStr = Array.isArray(parsedFields.Name) ? parsedFields.Name[0] : parsedFields.Name;
-    const senderName = nameStr || fullName || "Applicant";
+    const senderName = fields.Name?.[0] || fields.Full_Name?.[0] || "Applicant";
+    const senderEmail = fields.Email?.[0] || fields.email?.[0] || "No Email";
+    const senderPhone = fields.Phone?.[0] || fields.phone?.[0] || "N/A";
+    const formType = fields.formType?.[0] || fields._subject?.[0] || "Web Form";
+    const message = fields.Message?.[0] || "No message provided.";
 
-    const emailStr = Array.isArray(parsedFields.Email) ? parsedFields.Email[0] : parsedFields.Email;
-    const fallbackEmailStr = Array.isArray(parsedFields.email) ? parsedFields.email[0] : parsedFields.email;
-    const senderEmail = emailStr || fallbackEmailStr || "No Email";
-    
-    const phoneStr = Array.isArray(parsedFields.Phone) ? parsedFields.Phone[0] : parsedFields.Phone;
-    const phoneNumStr = Array.isArray(parsedFields.phone) ? parsedFields.phone[0] : parsedFields.phone;
-    const senderPhone = phoneStr || phoneNumStr || "N/A";
+    const finalSubject = `Zarkoon Security - New Inquiry (${formType}) from ${senderName}`;
+    let dynamicBody = `Form Type: ${formType}\nSender Name: ${senderName}\nEmail: ${senderEmail}\nPhone: ${senderPhone}\n\nMessage: ${message}\n`;
 
-    const formType = Array.isArray(parsedFields.formType) ? parsedFields.formType[0] : parsedFields.formType;
-    const subjectToken = Array.isArray(parsedFields._subject) ? parsedFields._subject[0] : parsedFields._subject;
+    const commonHosts = [
+      { service: 'gmail', host: 'smtp.gmail.com', name: 'Gmail Service' },
+      { host: 'smtp.zoho.eu', name: 'Zoho EU' },
+      { host: 'smtp.zoho.com', name: 'Zoho Global' },
+    ];
 
-    const determinedFormType = formType || subjectToken || "Web Form";
-    const finalSubject = `Zarkoon Security - New Inquiry (${determinedFormType}) from ${senderName}`;
+    let lastError = null;
 
-    let dynamicBody = `Form Type: ${determinedFormType}\n`;
-    dynamicBody += `Sender Name: ${senderName}\n`;
-    dynamicBody += `Email: ${senderEmail}\n`;
-    dynamicBody += `Phone: ${senderPhone}\n\n`;
+    for (const hostInfo of commonHosts) {
+      console.log(`Diagnostic: Testing ${hostInfo.name} for info@zarkoonsecurity.co.uk...`);
+      try {
+        const transporter = nodemailer.createTransport({
+          ...(hostInfo.service ? { service: hostInfo.service } : { host: hostInfo.host, port: 465, secure: true }),
+          auth: {
+            user: 'info@zarkoonsecurity.co.uk',
+            pass: 'URruP2yw8E2Z',
+          },
+        });
 
-    const message = Array.isArray(parsedFields.Message) ? parsedFields.Message[0] : parsedFields.Message;
-    if (message) {
-      dynamicBody += `Message: ${message}\n\n`;
-    }
+        const mailOptions = {
+          from: '"Zarkoon Security" <info@zarkoonsecurity.co.uk>',
+          to: 'info@zarkoonsecurity.co.uk',
+          replyTo: senderEmail,
+          subject: finalSubject,
+          text: dynamicBody,
+          attachments: files.attachment ? [{ filename: files.attachment[0].originalFilename, path: files.attachment[0].filepath }] : [],
+        };
 
-    dynamicBody += `Additional Details:\n`;
-    dynamicBody += `--------------------------------------------------------\n`;
-    
-    for (const [key, value] of Object.entries(parsedFields)) {
-      const excludedKeys = ['formType', '_subject', '_captcha', '_template', 'Name', 'Full_Name', 'Email', 'email', 'Phone', 'phone', 'Message'];
-      if (excludedKeys.includes(key)) continue;
-      
-      const parsedValue = Array.isArray(value) ? value[0] : value;
-      if (parsedValue && parsedValue.trim() !== '') {
-        const readableKey = key.replace(/_/g, ' ');
-        dynamicBody += `${readableKey}: ${parsedValue}\n`;
+        const info = await transporter.sendMail(mailOptions);
+        console.log(`Diagnostic Success: Email sent via ${hostInfo.name}! (ID: ${info.messageId})`);
+        return sendJson(res, 200, { success: true, message: `Email delivered via ${hostInfo.name}` });
+      } catch (err) {
+        console.error(`${hostInfo.name} Attempt Failed:`, err.message);
+        lastError = err;
+        // Continue to the next host if it's an Auth error
       }
     }
-    dynamicBody += `--------------------------------------------------------\n`;
 
-    const file = Array.isArray(parsedFiles.attachment) ? parsedFiles.attachment[0] : parsedFiles.attachment;
-
-    console.log("Setting up Gmail Nodemailer transporter...");
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'info@zarkoonsecurity.co.uk',
-        pass: 'URruP2yw8E2Z',
-      },
+    // If we reach here, all 3 failed
+    return sendJson(res, 535, { 
+      success: false, 
+      message: "Authentication failed on all attempted mail servers (Gmail, Zoho EU, Zoho Global).", 
+      error: lastError.message 
     });
 
-    const mailOptions = {
-      from: '"Zarkoon Security - Website Inquiry" <info@zarkoonsecurity.co.uk>',
-      to: 'info@zarkoonsecurity.co.uk',
-      replyTo: senderEmail,
-      subject: finalSubject,
-      text: dynamicBody,
-      attachments: file
-        ? [
-            {
-              filename: file.originalFilename || "CV_Attachment.pdf",
-              path: file.filepath,
-            },
-          ]
-        : [],
-    };
-
-    console.log("Attempting to send email via Gmail...");
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully: ", info.messageId);
-    return sendJson(res, 200, { success: true, message: "Email sent" });
-
   } catch (error) {
-    console.error("SMTP Error Detail:", error);
-    return sendJson(res, 500, { success: false, message: "Email delivery failed", error: error.message });
+    console.error("Critical API Error:", error);
+    return sendJson(res, 500, { success: false, message: "Critical Server Error", error: error.message });
   }
 }
