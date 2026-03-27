@@ -3,7 +3,7 @@ import heroImage from "figma:asset/fd89c50b51e11daa406f26cd662b773770c8036f.png"
 
 export function HeroSection() {
   return (
-    <section className="relative w-full h-[650px] overflow-hidden font-['Outfit']">
+    <section className="relative w-full min-h-[650px] md:h-[650px] overflow-hidden font-['Outfit'] pt-[150px] md:pt-[60px] lg:pt-[80px]">
       {/* Full-Width Hero Background Image - Edge to Edge */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
@@ -25,7 +25,7 @@ export function HeroSection() {
           </p>
 
           {/* Main Heading - SINGLE LAYER ONLY */}
-          <h1 className="text-white text-6xl font-bold leading-[1.15] mb-6 tracking-tight">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.15] mb-6 tracking-tight">
             Safeguarding You,<br />
             Securing Tomorrow:<br />
             <span className="text-[#5DADE2]">Zarkoon Security</span><br />

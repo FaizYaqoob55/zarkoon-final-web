@@ -160,14 +160,17 @@ export function EventSecurity() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0A1929] to-transparent opacity-60"></div>
                         </div>
                     </div>
-                    <div className="lg:col-span-6 bg-[#0A1929] p-16 rounded-[60px] text-white shadow-3xl border border-[#1E88E5]/20 transform lg:-translate-x-12 relative z-20">
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="p-3 bg-[#1E5A8E] rounded-2xl">
+                    <div className="lg:col-span-6 bg-[#0A1929] p-8 md:p-16 rounded-[40px] md:rounded-[60px] text-white shadow-3xl border border-[#1E88E5]/20 transform lg:-translate-x-12 relative z-20">
+                        <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8 text-center md:text-left">
+                            <div className="p-3 bg-[#1E5A8E] rounded-2xl flex-shrink-0">
                                 <Info className="w-8 h-8 text-[#5DADE2]" />
                             </div>
-                            <h2 className="text-4xl font-bold leading-tight">How much does security <br /><span className="text-[#5DADE2]">cost for a festival?</span></h2>
+                            <h2 className="text-2xl md:text-4xl font-bold leading-tight">
+                                How much does security <br className="hidden md:block" />
+                                <span className="text-[#5DADE2]">cost for a festival?</span>
+                            </h2>
                         </div>
-                        <p className="text-gray-300 text-lg font-light leading-relaxed mb-10">
+                        <p className="text-gray-300 text-base md:text-lg font-light leading-loose md:leading-relaxed mb-10 text-center md:text-left">
                             Event security pricing is dynamic and depends heavily on the risk profile of your gathering. Factors include crowd size, high-profile attendance, alcoholic beverage availability, and the duration of the event. At Zarkoon Security Limited, we provide transparent, competitive rates based on SIA-licensed personnel requirements.
                         </p>
                         <div className="space-y-6">
@@ -177,17 +180,19 @@ export function EventSecurity() {
                                 "Emergency Response Teams",
                                 "Transparent Hourly Rates"
                             ].map((point, i) => (
-                                <div key={i} className="flex items-center gap-4 group">
+                                <div key={i} className="flex items-center justify-center md:justify-start gap-4 group">
                                     <div className="w-2 h-2 bg-[#5DADE2] rounded-full group-hover:scale-150 transition-transform"></div>
                                     <span className="text-gray-200 font-medium tracking-wide">{point}</span>
                                 </div>
                             ))}
                         </div>
-                        <Link to="/contact-us" className="mt-12 inline-block">
-                            <Button className="bg-[#5DADE2] text-[#0A1929] hover:bg-white px-10 py-5 rounded-2xl font-black uppercase tracking-tighter transition-all">
-                                Request Precise Pricing
-                            </Button>
-                        </Link>
+                        <div className="mt-12 text-center md:text-left">
+                            <Link to="/contact-us" className="inline-block">
+                                <Button className="bg-[#5DADE2] text-[#0A1929] hover:bg-white px-10 py-5 rounded-2xl font-black uppercase tracking-tighter transition-all">
+                                    Request Precise Pricing
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
